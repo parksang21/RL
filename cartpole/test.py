@@ -4,8 +4,9 @@ from gym import wrappers
 import numpy as np
 import random as ran
 
+tf.disable_v2_behavior()
+
 env = gym.make('CartPole-v0')
-tf.disable_eager_execution()
 # 꺼내서 사용할 리플레이 갯수
 REPLAY = 50
 # 리플레이를 저장할 리스트
@@ -30,10 +31,10 @@ y=tf.placeholder(dtype=tf.float32, shape=(None, OUTPUT))
 dropout = tf.placeholder(dtype=tf.float32)
 
 # Main 네트워크
-W1 = tf.get_variable('W1',shape=[INPUT, 200],initializer=tf.contrib.layers.xavier_initializer())
-W2 = tf.get_variable('W2',shape=[200,200],initializer=tf.contrib.layers.xavier_initializer())
+W1 = tf.get_variable('W1',shape=[INPUT, 200],initializer=tf.initializers.glorot_normal())
+W2 = tf.get_variable('W2',shape=[200,200],initializer=tf.initializers.glorot_normal())
 # W3 = tf.get_variable('W3',shape=[200,150],initializer=tf.contrib.layers.xavier_initializer())
-W4 = tf.get_variable('W4',shape=[200, OUTPUT],initializer=tf.contrib.layers.xavier_initializer())
+W4 = tf.get_variable('W4',shape=[200, OUTPUT],initializer=tf.initializers.glorot_normal())
 
 b1 = tf.Variable(tf.zeros([1],dtype=tf.float32))
 b2 = tf.Variable(tf.zeros([1],dtype=tf.float32))
@@ -149,14 +150,14 @@ with tf.Session() as sess:
 
                 if d_r:
                     # 꺼내온 리플레이의 상태가 끝난 상황이라면 Negative Reward를 부여
-                    if count_r < env.spec.timestep_limit :
+                    if count_r < 1000 :
                         Q[0, a_r] = -100
                 else:
                     # 끝나지 않았다면 Q값을 업데이트
                     s1_t_r= np.reshape(s1_r,[1,INPUT])
                     Q1 = sess.run(Q_pre_r, feed_dict={x: s1_t_r})
                     Q[0, a_r] = r_r + DISCOUNT * np.max(Q1)
-
+                print(Q)
                 # 업데이트 된 Q값으로 main네트워크를 학습
                 _, loss = sess.run([train, cost], feed_dict={x: s_t_r, y: Q, dropout:1})
 
