@@ -14,7 +14,7 @@ class DQN:
         self.state_size = self.env.observation_space.shape[0]
         self.action_size = self.env.action_space.n
         self.multistep = multistep  # Multistep(n-step) 구현 시 True로 설정, 미구현 시 False
-        self.n_steps = 4            # Multistep(n-step) 구현 시 n 값, 수정 가능
+        self.n_steps = 2            # Multistep(n-step) 구현 시 n 값, 수정 가능
 
         self.replay = 32
         self.replay_Memory = []
@@ -34,8 +34,6 @@ class DQN:
 
     def remember_state(self, state, action, reward, next_state, done, count):
         self.replay_Memory.append([state, action, reward, next_state, done, count])
-
-        # replay memory가 5만이 넘으면 FIFO를 통해 제일 앞의 memroy 삭제
         if len(self.replay_Memory) > 500:
             del self.replay_Memory[0]
 
@@ -98,6 +96,7 @@ class DQN:
 
                 self.epsilon = self.update_epsilon(self.epsilon)
 
+                r_count = 0
                 # episode 시작
                 while not done:
 
@@ -111,9 +110,14 @@ class DQN:
                         action = np.argmax(Q)
 
                     next_state, reward, done, _ = self.env.step(action)
+
+                    if r_count == self.n_steps:
+                        pass
+
                     self.remember_state(state, action, reward, next_state, done, step_count)
                     state = next_state
                     step_count += 1
+                    r_count += 1
 
                 if episode % 2 == 1 and len(self.replay_Memory) > self.replay:
                     for sample in random.sample(self.replay_Memory, self.replay):

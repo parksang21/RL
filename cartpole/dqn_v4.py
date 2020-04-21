@@ -11,14 +11,15 @@ class DQN:
         tf.disable_eager_execution()
 
         self.env = env
+
         self.state_size = self.env.observation_space.shape[0]
         self.action_size = self.env.action_space.n
         self.multistep = multistep  # Multistep(n-step) 구현 시 True로 설정, 미구현 시 False
         self.n_steps = 3            # Multistep(n-step) 구현 시 n 값, 수정 가능
 
-        self.replay = 64
+        self.replay = 100
         self.replay_Memory = []
-        self.minibatch = 64
+        self.minibatch = 32
         self.learning_rate = 0.001
         self.discount = 0.9
         self.epsilon = 0.1
@@ -34,14 +35,7 @@ class DQN:
 
     def remember_state(self, state, action, reward, next_state, done, count):
         self.replay_Memory.append([state, action, reward, next_state, done, count])
-
-        # replay memory가 5만이 넘으면 FIFO를 통해 제일 앞의 memroy 삭제
-
-        if self.multistep:
-            memorysize = 1000
-        else:
-            memorysize = 1000
-        if len(self.replay_Memory) > memorysize:
+        if len(self.replay_Memory) > 500:
             del self.replay_Memory[0]
 
     # episode 최대 횟수는 구현하는 동안 더 적게, 더 많이 돌려보아도 무방합니다.
@@ -49,8 +43,6 @@ class DQN:
     def learn(self, max_episode=1500):
         avg_step_count_list = []     # 결과 그래프 그리기 위해 script.py 로 반환
         last_100_episode_step_count = deque(maxlen=100)
-
-
         x = tf.placeholder(dtype=tf.float32, shape=(None, self.state_size))
 
         y = tf.placeholder(dtype=tf.float32, shape=(None, self.action_size))
@@ -58,9 +50,9 @@ class DQN:
 
         # Main 네트워크
         with tf.variable_scope("Network_M{}".format(int(self.multistep))):
-            W1 = tf.get_variable('W1', shape=[self.state_size, 200], initializer=tf.initializers.random_normal())
+            W1 = tf.get_variable('W1', shape=[self.state_size, 200], initializer=tf.initializers.glorot_normal())
             W2 = tf.get_variable('W2', shape=[200, 200], initializer=tf.initializers.glorot_normal())
-            W3 = tf.get_variable('W3', shape=[200, self.action_size], initializer=tf.initializers.random_normal())
+            W3 = tf.get_variable('W3', shape=[200, self.action_size], initializer=tf.initializers.glorot_normal())
 
             b1 = tf.Variable(tf.zeros([1], dtype=tf.float32))
             b2 = tf.Variable(tf.zeros([1], dtype=tf.float32))
@@ -118,45 +110,45 @@ class DQN:
                         action = np.argmax(Q)
 
                     next_state, reward, done, _ = self.env.step(action)
+
                     self.remember_state(state, action, reward, next_state, done, step_count)
                     state = next_state
                     step_count += 1
 
-                if len(self.replay_Memory) > self.minibatch:
+                if len(self.replay_Memory) > self.replay:
                     indexes = np.random.randint(low=0, high=len(self.replay_Memory) - self.n_steps +1, size=self.minibatch)
-                        # random.sample([i for i in range(len(self.replay_Memory) - self.n_steps + 1)], self.replay)
-
-                    copy_step_count = 0
                     for index in indexes:
                         state, action, reward, next_state, done, count = self.replay_Memory[index]
 
                         Q = sess.run(Q_pre, feed_dict={x: state, dropout: 1})
 
-                        if done:
+                        discount = self.discount
+                        reward_sum = reward
+                        if done and count < 500:
                             Q[0, action] = -500
                         else:
-                            discount = self.discount
-                            reward_sum = reward
                             last_state = next_state
+
                             if self.multistep:
                                 for step in range(1, self.n_steps +1):
                                     n_state, n_action, n_reward, n_next_state, n_done, n_count = self.replay_Memory[index + step]
-                                    if n_done and not n_count == 500:
+                                    if n_done and n_count < 500:
                                         reward_sum = -500
                                         break
                                     last_state = n_state
                                     reward_sum += discount * n_reward
                                     discount *= discount
 
-                            next_state_u = np.reshape(last_state, [1, self.state_size])
-                            Q1 = sess.run(Q_pre_r, feed_dict={x: next_state_u})
-
-                            Q[0, action] = reward_sum + discount * np.max(Q1)
+                            n_next_state = np.reshape(last_state, [1, self.state_size])
+                            Qn = sess.run(Q_pre_r, feed_dict={x: n_next_state})
+                            Q[0, action] = reward_sum + discount * np.max(Qn)
 
                         sess.run([train, cost], feed_dict={x: state, y: Q, dropout: 1})
-                        copy_step_count += 1
-
-                if episode % 100 == 0:
+                if not self.multistep:
+                    update_rate = 10
+                else:
+                    update_rate = 10
+                if episode % update_rate == 0:
                     sess.run(W1_r.assign(W1))
                     sess.run(W2_r.assign(W2))
                     sess.run(W3_r.assign(W3))
@@ -176,3 +168,51 @@ class DQN:
                 if avg_step_count > 475:
                     break
         return avg_step_count_list
+
+
+
+
+import os
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import gym
+
+orgDQN, multistep = False, False
+
+if len(sys.argv) == 1:
+    print("There is no argument, please input")
+
+for i in range(1,len(sys.argv)):
+    if sys.argv[i] == "orgDQN":
+        orgDQN = True
+    elif sys.argv[i] == "multistep":
+        multistep = True
+
+
+env = gym.make('CartPole-v1')
+
+if orgDQN:
+    env.reset()
+    dqn = DQN(env, multistep=False)
+    orgDQN_record = dqn.learn(1500)
+    del dqn
+
+if multistep:
+    env.reset()
+    dqn = DQN(env, multistep=True)
+    multistep_record = dqn.learn(1500)
+    del dqn
+
+print("Reinforcement Learning Finish")
+print("Draw graph ... ")
+
+if orgDQN:
+    plt.plot(np.arange((len(orgDQN_record))), orgDQN_record, label='Orginal DQN')
+if multistep:
+    plt.plot(np.arange((len(multistep_record))), multistep_record, label='Multistep DQN')
+
+plt.legend()
+fig =plt.gcf()
+plt.savefig("result.png")
+plt.show()
