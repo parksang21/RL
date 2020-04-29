@@ -2,28 +2,149 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7fbe76e4-c5a5-449d-88eb-7abb4baed576" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ReinforcementLearning_2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ReinforcementLearning_2020.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cartpole/dqn.py" beforeDir="false" afterPath="$PROJECT_DIR$/cartpole/dqn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cartpole/dqn_v4.py" beforeDir="false" afterPath="$PROJECT_DIR$/cartpole/dqn_v4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cartpole/result.png" beforeDir="false" afterPath="$PROJECT_DIR$/cartpole/result.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aWMagO8EDF7G7tCRBgJMgSv1sh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cartpole/script.py" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cartpole" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.script">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="ReinforcementLearning_2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="multistep only" type="PythonConfigurationType" factoryName="Python">
+      <module name="ReinforcementLearning_2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/envs/pytorch/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cartpole" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cartpole/script.py" />
+      <option name="PARAMETERS" value="multistep" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="org only" type="PythonConfigurationType" factoryName="Python">
+      <module name="ReinforcementLearning_2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/envs/pytorch/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cartpole" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cartpole/script.py" />
+      <option name="PARAMETERS" value="orgDQN" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="ReinforcementLearning_2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/envs/pytorch/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cartpole" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cartpole/script.py" />
+      <option name="PARAMETERS" value="orgDQN multistep" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.script" />
+      <item itemvalue="Python.org only" />
+      <item itemvalue="Python.multistep only" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -35,11 +156,42 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586846961795</updated>
-      <workItem from="1586846964135" duration="639000" />
+      <workItem from="1586846964135" duration="11721000" />
+      <workItem from="1587012748572" duration="37764000" />
+      <workItem from="1587371262376" duration="4136000" />
+      <workItem from="1587450215553" duration="7133000" />
+      <workItem from="1587457361826" duration="14206000" />
+      <workItem from="1587474151596" duration="2522000" />
+      <workItem from="1587477014240" duration="1936000" />
+      <workItem from="1587479144805" duration="2787000" />
+      <workItem from="1587712123181" duration="51000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2338" y="151" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587474005206">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="418" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1587273513876" />
+    <state x="2338" y="151" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.991@1920.0.1920.1080" timestamp="1587474005206" />
+    <state x="2663" y="260" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587464197115">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="743" y="266" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1587273501418" />
+    <state x="2663" y="260" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.991@1920.0.1920.1080" timestamp="1587464197115" />
+    <state x="318" y="84" width="1171" height="833" key="dock-window-1" timestamp="1586874887133">
+      <screen x="0" y="27" width="1920" height="991" />
+    </state>
+    <state x="318" y="84" width="1171" height="833" key="dock-window-1/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1586874887133" />
+    <state x="623" y="222" width="672" height="678" key="search.everywhere.popup" timestamp="1587113475036">
+      <screen x="0" y="27" width="1920" height="991" />
+    </state>
+    <state x="623" y="222" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1587113475036" />
   </component>
 </project>

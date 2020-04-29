@@ -25,17 +25,15 @@ class DQN:
         self.epsilon = 0.1
 
 
-    def train_minibatch(self, ):
-        # mini batch를 받아 policy를 update
-        pass
-
     def update_epsilon(self, epsilon):
         # Exploration 시 사용할 epsilon 값을 업데이트
+        if epsilon < 0.01:
+            return 0.01
         return epsilon * 0.9999
 
     def remember_state(self, state, action, reward, next_state, done, count):
         self.replay_Memory.append([state, action, reward, next_state, done, count])
-        if len(self.replay_Memory) > 500:
+        if len(self.replay_Memory) > 10000:
             del self.replay_Memory[0]
 
     # episode 최대 횟수는 구현하는 동안 더 적게, 더 많이 돌려보아도 무방합니다.
@@ -48,8 +46,8 @@ class DQN:
         y = tf.placeholder(dtype=tf.float32, shape=(None, self.action_size))
         dropout = tf.placeholder(dtype=tf.float32)
 
-        # Main 네트워크
         with tf.variable_scope("Network_M{}".format(int(self.multistep))):
+            # Learning Network
             W1 = tf.get_variable('W1', shape=[self.state_size, 200], initializer=tf.initializers.glorot_normal())
             W2 = tf.get_variable('W2', shape=[200, 200], initializer=tf.initializers.glorot_normal())
             W3 = tf.get_variable('W3', shape=[200, self.action_size], initializer=tf.initializers.glorot_normal())
@@ -63,7 +61,7 @@ class DQN:
             L2 = tf.nn.dropout(_L2, dropout)
             Q_pre = tf.matmul(L2, W3)
 
-            # Target 네트워크
+            # Prediction 네트워크
             W1_r = tf.get_variable('W1_r', shape=[self.state_size, 200])
             W2_r = tf.get_variable('W2_r', shape=[200, 200])
             W3_r = tf.get_variable('W3_r', shape=[200, self.action_size])
@@ -75,15 +73,17 @@ class DQN:
             L2_r = tf.nn.relu(tf.matmul(L1_r, W2_r) + b2_r)
             Q_pre_r = tf.matmul(L2_r, W3_r)
 
-            # Loss function 정의
+            # Loss function
             cost = tf.reduce_sum(tf.square(y - Q_pre))
             optimizer = tf.train.AdamOptimizer(self.learning_rate, epsilon=1e-8)
             train = optimizer.minimize(cost)
 
+            learning_step = 15
+
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
 
-            # Target 네트워크에 main 네트워크 값을 카피해줌
+            # 초기 값은 복사해서 저장한다.
             sess.run(W1_r.assign(W1))
             sess.run(W2_r.assign(W2))
             sess.run(W3_r.assign(W3))
@@ -144,11 +144,9 @@ class DQN:
                             Q[0, action] = reward_sum + discount * np.max(Qn)
 
                         sess.run([train, cost], feed_dict={x: state, y: Q, dropout: 1})
-                if not self.multistep:
-                    update_rate = 10
-                else:
-                    update_rate = 10
-                if episode % update_rate == 0:
+                if episode % 100 == 0:
+                    learning_step -= 1
+                if episode % 5 == 0:
                     sess.run(W1_r.assign(W1))
                     sess.run(W2_r.assign(W2))
                     sess.run(W3_r.assign(W3))
@@ -165,54 +163,11 @@ class DQN:
 
                 avg_step_count_list.append(avg_step_count)
 
+                # if episode % 500 == 0:
+                #     self.minibatch *=2
+
                 if avg_step_count > 475:
                     break
+            sess.close()
         return avg_step_count_list
 
-
-
-
-import os
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import gym
-
-orgDQN, multistep = False, False
-
-if len(sys.argv) == 1:
-    print("There is no argument, please input")
-
-for i in range(1,len(sys.argv)):
-    if sys.argv[i] == "orgDQN":
-        orgDQN = True
-    elif sys.argv[i] == "multistep":
-        multistep = True
-
-
-env = gym.make('CartPole-v1')
-
-if orgDQN:
-    env.reset()
-    dqn = DQN(env, multistep=False)
-    orgDQN_record = dqn.learn(1500)
-    del dqn
-
-if multistep:
-    env.reset()
-    dqn = DQN(env, multistep=True)
-    multistep_record = dqn.learn(1500)
-    del dqn
-
-print("Reinforcement Learning Finish")
-print("Draw graph ... ")
-
-if orgDQN:
-    plt.plot(np.arange((len(orgDQN_record))), orgDQN_record, label='Orginal DQN')
-if multistep:
-    plt.plot(np.arange((len(multistep_record))), multistep_record, label='Multistep DQN')
-
-plt.legend()
-fig =plt.gcf()
-plt.savefig("result.png")
-plt.show()
