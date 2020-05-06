@@ -20,4 +20,5 @@ def save_frames_as_gif(frames, path='./', filename='gym_animation.gif'):
         patch.set_data(frames[i])
 
     anim = animation.FuncAnimation(plt.gcf(), animate, frames = len(frames), interval=50)
+    plt.close()
     anim.save(path + filename, writer='imagemagick', fps=60)
