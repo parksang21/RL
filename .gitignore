@@ -1,3 +1,4 @@
-idea/
+.idea/
 PongDuel/ma-gym/
 PongDuel/render_sample/
+.DS_Store/
