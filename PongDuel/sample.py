@@ -10,7 +10,7 @@ import numpy as np
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 class Model(tf.keras.Model):
-    def __init__(self, num_actions, num_states):
+    def __init__(self, num_actions):
         super().__init__(name='dqn')
 
         self.shared_fc1 = kl.Dense(16, activation='relu', kernel_initializer='he_uniform')
