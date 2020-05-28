@@ -10,9 +10,7 @@ from collections import deque
 
 
 from gym_to_gif import save_frames_as_gif
-'''
-공을 튕겼을 때에 대한 positive reward를 주는 코드를 작
-'''
+
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 np.random.seed(1)
@@ -20,7 +18,7 @@ tf.random.set_seed(1)
 
 b = 0
 
-# Neural Network Model Defined at Here.성
+# Neural Network Model Defined at Here.
 # Neural Network Model Defined at Here.
 class Model(tf.keras.Model):
     def __init__(self, num_actions):
@@ -56,9 +54,13 @@ def test_model():
     best_action, q_values = model.action_value(obs[None])
     print('res of test model: ', best_action, q_values)  # 0 [ 0.00896799 -0.02111824]
 
+'''
+change buffer size from 1000 to 10000
+change epsilon from 1.0 to 0.9
+'''
 class DDQNAgent:  # Double Deep Q-Network
-    def __init__(self, model, target_model, env, buffer_size=1000, learning_rate=.0015, epsilon=1.0, epsilon_dacay=0.995,
-                 min_epsilon=.01, gamma=.9, batch_size=64, target_update_iter=200, train_nums=5000, start_learning=2,):
+    def __init__(self, model, target_model, env, buffer_size=500, learning_rate=.0015, epsilon=0.9, epsilon_dacay=0.995,
+                 min_epsilon=.01, gamma=.9, batch_size=64, target_update_iter=10, train_nums=5000, start_learning=2,):
 
         self.model_p = model
         self.target_model_p = target_model
@@ -107,9 +109,8 @@ class DDQNAgent:  # Double Deep Q-Network
             done = [False, False]
             rewards = np.zeros((1,2))
             self.e_decay()
-            ball_position = .0
-            n_ball_position = .0
-            while not done[0]:
+            win_step_count = 0
+            while not done[0] and step_count < 100000:
                 best_action_p, q_values_p = self.model_p.action_value(obs[None])  # input the obs to the network model
                 best_action_q, q_values_q = self.model_q.action_value(obs[None])  # input the obs to the network model
 
@@ -120,15 +121,28 @@ class DDQNAgent:  # Double Deep Q-Network
                 next_obs = np.asarray(next_obs[0] + next_obs[1][:2])
                 # _____________________________________________________________________________________________________
                 # reward function 만들어야 한다.
-                ball_position = obs[2]
+                win_step_count += 1
+                ball_position = obs[2:4]
+                ball_d = obs[4:10]
                 if reward[0] == 1:
                     # 왼쪽이 이기고 오른쪽이 짐
-                    reward[1] = -10 * abs(ball_position - obs[-2])
+                    reward[0] = 1
+                    reward[1] += -10 * abs(ball_position[0] - obs[-2])
+                    win_step_count = 0
 
                 if reward[1] == 1:
-                    reward[0] = -10 * abs(ball_position - obs[0])
+                    reward[1] = 1
+                    reward[0] += -10 * abs(ball_position[0] - obs[0])
+                    win_step_count = 0
 
-
+                # left player에게 향하고 있다.
+                if np.sum(ball_d[:4]) == 1:
+                    reward[0] = -1 * (abs(obs[0] - ball_position[0]) + abs(obs[1] - ball_position[1]))
+                    pass
+                # right player에게 향하고 있다.
+                elif np.sum(ball_d[-3:]) == 1:
+                    reward[1] = -1 * (abs(obs[10] - ball_position[0]) + abs(obs[11] - ball_position[1]))
+                    pass
                 # _____________________________________________________________________________________________________
 
 
@@ -154,15 +168,18 @@ class DDQNAgent:  # Double Deep Q-Network
 
             if t > self.start_learning:  # start learning
                 losses = self.train_step()
+                print("[Total EPISODE{:>5}]\tsteps : {:>5}\tavg100 setp : {:>5.5}\tlosses: {}\tepsilon: {}\nrewards : {}"
+                      .format(t, step_count, np.mean(average_step_count), losses, self.epsilon, rewards))
 
             average_step_count.append(step_count)
 
-            if t % 100 == 1:
-                self.model_p.save_weights('./test.ckpt')
+            if t % 100 == 0:
+                self.model_p.save_weights('./saved_weights/{}.ckpt'.format(t))
 
 
 
-            print("Total EPISODE{:>5} steps : {:>5} avg100 setp : {:>5}".format(t, step_count, np.mean(average_step_count)))
+
+
 
     def train_step(self):
         idxes = self.sample(self.batch_size)
@@ -178,8 +195,8 @@ class DDQNAgent:  # Double Deep Q-Network
         target_q_q = self.get_target_value(ns_batch, 1)
 
         # evaluation with the target DQN model
-        target_q_p = r_batch[:,0] + self.gamma * target_q_p[np.arange(target_q_p.shape[0]), best_action_idxes] * (1 - done_batch[:,0])
-        target_q_q = r_batch[:,1] + self.gamma * target_q_q[np.arange(target_q_q.shape[0]), best_action_idxes] * (1 - done_batch[:,1])
+        target_q_p = r_batch[:,0] + self.gamma * target_q_p[np.arange(target_q_p.shape[0]), best_action_idxes]
+        target_q_q = r_batch[:,1] + self.gamma * target_q_q[np.arange(target_q_q.shape[0]), best_action_idxes]
 
         target_f_p = self.model_p.predict(s_batch)
         target_f_q = self.model_q.predict(s_batch)
@@ -209,10 +226,10 @@ class DDQNAgent:  # Double Deep Q-Network
             if render:  # visually show
                 frame.append(env.render(mode='rgb_array'))
 
-        env.close()
+        # env.close()
         global b
-        save_frames_as_gif(frame, path='./', filename="trial{}.gif".format(b))
-        print(b,'is saved')
+        save_frames_as_gif(frame, path='./render_results/', filename="{}trial.gif".format(b))
+        print(b, 'is saved')
         b += 1
         return ep_reward
 

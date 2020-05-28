@@ -1,0 +1,2 @@
+model_checkpoint_path: "only_distance600.ckpt"
+all_model_checkpoint_paths: "only_distance600.ckpt"

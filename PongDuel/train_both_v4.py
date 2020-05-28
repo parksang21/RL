@@ -54,9 +54,13 @@ def test_model():
     best_action, q_values = model.action_value(obs[None])
     print('res of test model: ', best_action, q_values)  # 0 [ 0.00896799 -0.02111824]
 
+'''
+change buffer size from 1000 to 10000
+change epsilon from 1.0 to 0.9
+'''
 class DDQNAgent:  # Double Deep Q-Network
-    def __init__(self, model, target_model, env, buffer_size=1000, learning_rate=.0015, epsilon=1.0, epsilon_dacay=0.995,
-                 min_epsilon=.01, gamma=.9, batch_size=64, target_update_iter=200, train_nums=5000, start_learning=2,):
+    def __init__(self, model, target_model, env, buffer_size=10000, learning_rate=.0015, epsilon=0.9, epsilon_dacay=0.995,
+                 min_epsilon=.01, gamma=.9, batch_size=64, target_update_iter=5, train_nums=5000, start_learning=2,):
 
         self.model_p = model
         self.target_model_p = target_model
@@ -152,6 +156,8 @@ class DDQNAgent:  # Double Deep Q-Network
 
             if t > self.start_learning:  # start learning
                 losses = self.train_step()
+                print("[Total EPISODE{:>5}]\tsteps : {:>5}\tavg100 setp : {:>5.5}\tlosses: {}\tepsilon: {}"
+                      .format(t, step_count, np.mean(average_step_count), losses, self.epsilon))
 
             average_step_count.append(step_count)
 
@@ -160,7 +166,7 @@ class DDQNAgent:  # Double Deep Q-Network
 
 
 
-            print("Total EPISODE{:>5} steps : {:>5} avg100 setp : {:>5}".format(t, step_count, np.mean(average_step_count)))
+
 
     def train_step(self):
         idxes = self.sample(self.batch_size)

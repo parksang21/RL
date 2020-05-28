@@ -30,7 +30,7 @@ if __name__ == '__main__':
     right_q2 = Queue()
 
     # studnetID 는 각 학생들 학번으로 변경 후 평가합니다..
-    studentID1 = "sample"
+    studentID1 = "2020710425"
     studentID2 = "sample"
     left_player = __import__(studentID1)
     right_player = __import__(studentID2)
@@ -55,7 +55,7 @@ if __name__ == '__main__':
             l_action = left_q2.get()
             r_action = right_q2.get()
             obs_n, reward_n, done_n, info = env.step([l_action, r_action])
-            frame.append(env.render(mode='rgb_array'))
+            # frame.append(env.render(mode='rgb_array'))
             #action_n = env.action_space.sample()
             #obs_n, reward_n, done_n, info = env.step(action_n)
 
@@ -63,11 +63,8 @@ if __name__ == '__main__':
             r_reward = reward_n[1]
             l_cnt += l_reward
             r_cnt += r_reward
-
-
+            env.render()
         print('Episode #{} left: {} right: {} '.format(ep_i, l_cnt, r_cnt))
-        fn = "episode #{}.gif".format(ep_i)
-        save_frames_as_gif(frame, path='./render_sample/', filename=fn)
 
     left_q1.put( None )
     right_q1.put( None )
