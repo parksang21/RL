@@ -10,7 +10,7 @@ class FinalModel:
     def __init__(self, env):
         # Load your Model here
         self.sess = tf.Session()
-        self.saver = tf.train.import_meta_graph('policy_model/100000_episodes.meta')
+        self.saver = tf.train.import_meta_graph('policy_model/2020710425_model.meta')
         self.saver.restore(self.sess, tf.train.latest_checkpoint('policy_model/'))
         self.action_size = env.action_space.shape[0]
         self.policy = Policy(env.observation_space.shape[0] + 1, self.action_size, 0.003, 10, -1.0, None)

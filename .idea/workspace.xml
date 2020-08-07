@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7fbe76e4-c5a5-449d-88eb-7abb4baed576" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:33:48/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:33:48/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:35:58/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:35:58/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:36:20/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:36:20/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:39:01/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:39:01/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:39:40/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:39:40/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:40:54/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_03:40:54/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:00:57/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:00:57/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:01:55/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:01:55/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:02:32/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:02:32/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:02:53/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:02:53/finalmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:04:40/finalmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/log-files/AntBulletEnv-v0/May-27_05:04:40/finalmodel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ant/ppo/src/archive.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/ppo/src/archive.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ant/ppo/src/plotting.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/ppo/src/plotting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ant/ppo/src/policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ant/ppo/src/policy.py" afterDir="false" />
@@ -38,7 +50,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Ant" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ICML2019-TREX" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -49,6 +61,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Ant/submission" />
       <recent name="$PROJECT_DIR$/Ant" />
       <recent name="$PROJECT_DIR$/PongDuel" />
       <recent name="$PROJECT_DIR$/cartpole" />
@@ -361,7 +374,10 @@
       <workItem from="1590474289756" duration="24940000" />
       <workItem from="1590555359925" duration="2054000" />
       <workItem from="1590559169999" duration="5000" />
-      <workItem from="1590910788724" duration="37000" />
+      <workItem from="1590910788724" duration="7704000" />
+      <workItem from="1590990562290" duration="245000" />
+      <workItem from="1591580453239" duration="4654000" />
+      <workItem from="1591707873987" duration="51000" />
     </task>
     <servers />
   </component>
@@ -379,11 +395,13 @@
     <state x="2678" y="148" width="1084" height="689" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.991/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590475883445" />
     <state x="418" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1587273513876" />
     <state x="2338" y="151" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.991@1920.0.1920.1080" timestamp="1587474005206" />
-    <state x="580" y="324" width="830" height="432" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590481738732">
-      <screen x="0" y="27" width="1920" height="991" />
+    <state x="2500" y="324" width="802" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591580474647">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="580" y="324" width="740" height="396" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.991/1920.0.1920.1080@0.27.1920.991" timestamp="1590481738732" />
     <state x="2500" y="324" width="830" height="432" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.991/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590476136456" />
+    <state x="580" y="324" key="#com.intellij.fileTypes.FileTypeChooser/3840.0.1920.1080/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1590919116369" />
+    <state x="2500" y="324" width="802" height="396" key="#com.intellij.fileTypes.FileTypeChooser/3840.0.1920.1080/1920.0.1920.1080/0.27.1920.991@1920.0.1920.1080" timestamp="1591580474647" />
     <state x="175" y="166" width="1395" height="528" key="#xdebugger.XInspectDialog" timestamp="1590475932532">
       <screen x="0" y="27" width="1920" height="991" />
     </state>
@@ -398,13 +416,13 @@
     </state>
     <state width="1177" height="506" key="DebuggerActiveHint/0.27.1920.991/1920.0.1920.1080@0.27.1920.991" timestamp="1589115675450" />
     <state width="1177" height="552" key="DebuggerActiveHint/0.27.1920.991/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590476065711" />
-    <state x="743" y="266" width="424" height="484" key="FileChooserDialogImpl" timestamp="1590497095599">
-      <screen x="0" y="27" width="1920" height="991" />
+    <state x="2663" y="260" width="424" height="484" key="FileChooserDialogImpl" timestamp="1591707923519">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="743" y="266" width="424" height="484" key="FileChooserDialogImpl/0.27.1920.991/1920.0.1920.1080@0.27.1920.991" timestamp="1590497095599" />
     <state x="2663" y="260" width="424" height="484" key="FileChooserDialogImpl/0.27.1920.991/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590475880133" />
     <state x="743" y="266" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.991@0.27.1920.991" timestamp="1587273501418" />
-    <state x="2663" y="260" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.991@1920.0.1920.1080" timestamp="1587464197115" />
+    <state x="2663" y="260" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.991@1920.0.1920.1080" timestamp="1591707923519" />
     <state width="1671" height="243" key="GridCell.Tab.0.bottom" timestamp="1590555328005">
       <screen x="0" y="27" width="1920" height="991" />
     </state>
@@ -525,16 +543,6 @@
           <url>file://$PROJECT_DIR$/PongDuel/train_4frame.py</url>
           <line>142</line>
           <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Ant/finalmodel.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Ant/finalmodel.py</url>
-          <line>72</line>
-          <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
